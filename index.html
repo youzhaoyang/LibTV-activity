@@ -8,22 +8,36 @@
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
 
   :root {
-    --gold: #F5A623;
-    --gold-light: #FFD97A;
-    --purple: #7C4DFF;
-    --purple-light: #B39DDB;
-    --bg: #0D0D1A;
-    --card: #16162A;
-    --card2: #1E1E36;
-    --border: rgba(255,255,255,0.08);
-    --text: #E8E8F0;
-    --muted: #888899;
+    /* 纯黑灰色板 · 高级感 */
+    --bg: #050505;
+    --bg-elev: #0a0a0a;
+    --card: #0f0f0f;
+    --card2: #141414;
+    --border: rgba(255,255,255,0.06);
+    --border-strong: rgba(255,255,255,0.12);
+    --text: #f5f5f5;
+    --text-soft: #d4d4d4;
+    --muted: #737373;
+    --muted-deep: #525252;
+    --accent: #a3a3a3;
+    --highlight: #e5e5e5;
+    /* 图表 / 强调：两档灰，非彩色 */
+    --tone-a: #e8e8e8;
+    --tone-b: #525252;
+    /* 兼容旧变量名 */
+    --gold: var(--highlight);
+    --gold-light: #fafafa;
+    --purple: var(--tone-b);
+    --purple-light: #737373;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255,255,255,0.04), transparent 50%),
+      radial-gradient(ellipse 80% 50% at 100% 100%, rgba(255,255,255,0.02), transparent 45%);
     color: var(--text);
     font-family: 'Noto Sans SC', sans-serif;
     min-height: 100vh;
@@ -36,7 +50,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
   }
@@ -58,18 +72,19 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--muted);
     margin-bottom: 12px;
   }
   .header h1 {
     font-size: clamp(28px, 5vw, 44px);
     font-weight: 900;
-    background: linear-gradient(135deg, #fff 30%, var(--gold-light));
+    background: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1.2;
     margin-bottom: 12px;
+    letter-spacing: -0.02em;
   }
   .header p {
     color: var(--muted);
@@ -83,12 +98,14 @@
   }
   .model-hero-card {
     position: relative;
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 32px 36px;
     overflow: hidden;
-    background: linear-gradient(135deg, #1A1040 0%, #0D1A30 50%, #1A0D2E 100%);
-    border: 1px solid rgba(139, 92, 246, 0.5);
-    box-shadow: 0 0 60px rgba(124,77,255,0.15), 0 0 120px rgba(245,166,35,0.05);
+    background: linear-gradient(165deg, #121212 0%, #0a0a0a 45%, #0d0d0d 100%);
+    border: 1px solid var(--border-strong);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 32px 80px rgba(0,0,0,0.65);
     display: flex;
     align-items: center;
     gap: 36px;
@@ -97,33 +114,34 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 70% 50%, rgba(124,77,255,0.2) 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 80%, rgba(245,166,35,0.1) 0%, transparent 50%);
+    background:
+      radial-gradient(ellipse 90% 70% at 85% 20%, rgba(255,255,255,0.045), transparent 55%),
+      radial-gradient(ellipse 60% 50% at 10% 90%, rgba(255,255,255,0.03), transparent 50%);
     pointer-events: none;
   }
   .model-hero-card::after {
     content: '';
     position: absolute;
-    top: -1px; left: 20%; right: 20%;
+    top: 0; left: 12%; right: 12%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(139,92,246,0.8), rgba(245,166,35,0.6), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
   }
   .model-icon-wrap {
     flex-shrink: 0;
     width: 72px;
     height: 72px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #7C4DFF, #4527A0);
-    border: 1px solid rgba(139,92,246,0.6);
+    border-radius: 14px;
+    background: linear-gradient(145deg, #1c1c1c, #111);
+    border: 1px solid var(--border-strong);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 32px rgba(124,77,255,0.4);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
     position: relative;
     z-index: 1;
   }
   .model-icon-wrap svg {
-    filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+    opacity: 0.92;
   }
   .model-hero-info {
     flex: 1;
@@ -137,7 +155,7 @@
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #A78BFF;
+    color: var(--muted);
     margin-bottom: 8px;
     font-weight: 600;
   }
@@ -146,8 +164,8 @@
     display: inline-block;
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: #7C4DFF;
-    box-shadow: 0 0 6px #7C4DFF;
+    background: var(--accent);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.15);
     animation: pulse 2s infinite;
   }
   @keyframes pulse {
@@ -157,23 +175,23 @@
   .model-name {
     font-size: 28px;
     font-weight: 900;
-    background: linear-gradient(135deg, #fff 20%, #C4B5FD 60%, #F5A623);
+    background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03em;
     line-height: 1.1;
     margin-bottom: 8px;
   }
   .model-desc {
     font-size: 13px;
-    color: #9090B0;
-    line-height: 1.6;
+    color: var(--muted);
+    line-height: 1.65;
     white-space: nowrap;
   }
   .model-desc em {
     font-style: normal;
-    color: #C4B5FD;
+    color: var(--text-soft);
     font-weight: 500;
   }
   .model-stat-group {
@@ -216,9 +234,9 @@
     font-size: 9px;
     padding: 2px 6px;
     border-radius: 4px;
-    background: rgba(124,77,255,0.2);
-    border: 1px solid rgba(124,77,255,0.35);
-    color: #C4B5FD;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border-strong);
+    color: var(--accent);
     font-weight: 600;
     letter-spacing: 0.3px;
     vertical-align: middle;
@@ -228,11 +246,11 @@
 
   /* Section title */
   .section-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--muted);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -242,8 +260,8 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
-    opacity: 0.3;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+    opacity: 1;
   }
 
   /* ===== MILESTONE TRACK ===== */
@@ -273,16 +291,16 @@
   }
   .milestone-row:hover {
     transform: translateX(4px);
-    border-color: rgba(245,166,35,0.3);
+    border-color: rgba(255,255,255,0.14);
     background: var(--card2);
   }
   .milestone-row.highlight {
-    background: linear-gradient(135deg, rgba(124,77,255,0.15), rgba(245,166,35,0.08));
-    border-color: rgba(245,166,35,0.4);
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    border-color: rgba(255,255,255,0.14);
   }
   .milestone-row.total-row {
-    background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(255,217,122,0.05));
-    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+    border-color: rgba(255,255,255,0.22);
     margin-top: 8px;
   }
 
@@ -305,14 +323,14 @@
     flex-shrink: 0;
   }
   .milestone-row.highlight .milestone-num {
-    background: linear-gradient(135deg, var(--purple), var(--gold));
-    border-color: transparent;
-    color: white;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-color: var(--border-strong);
+    color: var(--highlight);
   }
   .milestone-row.total-row .milestone-num {
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background: linear-gradient(145deg, #e8e8e8, #a3a3a3);
     border-color: transparent;
-    color: #000;
+    color: #0a0a0a;
     font-size: 10px;
     font-weight: 900;
   }
@@ -338,7 +356,7 @@
     margin-bottom: 6px;
   }
   .multiplier-label .val {
-    color: var(--gold);
+    color: var(--text-soft);
     font-weight: 700;
   }
   .multiplier-bar {
@@ -350,7 +368,7 @@
   .multiplier-fill {
     height: 100%;
     border-radius: 999px;
-    background: linear-gradient(90deg, var(--purple), var(--gold));
+    background: linear-gradient(90deg, var(--tone-b), var(--tone-a));
     transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
     width: 0;
   }
@@ -372,8 +390,8 @@
     font-weight: 500;
     white-space: nowrap;
   }
-  .chip-gold { background: rgba(245,166,35,0.15); color: var(--gold); border: 1px solid rgba(245,166,35,0.2); }
-  .chip-purple { background: rgba(124,77,255,0.15); color: #A78BFF; border: 1px solid rgba(124,77,255,0.2); }
+  .chip-gold { background: rgba(255,255,255,0.06); color: var(--text-soft); border: 1px solid var(--border-strong); }
+  .chip-purple { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
 
   /* Header row */
   .milestone-header {
@@ -410,10 +428,11 @@
   }
   .membership-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.55);
+    border-color: rgba(255,255,255,0.12);
   }
-  .membership-card.annual { border-color: rgba(245,166,35,0.35); }
-  .membership-card.monthly { border-color: rgba(124,77,255,0.25); }
+  .membership-card.annual { border-color: rgba(255,255,255,0.1); }
+  .membership-card.monthly { border-color: rgba(255,255,255,0.07); }
 
   .membership-card .badge {
     display: inline-block;
@@ -424,8 +443,8 @@
     margin-bottom: 10px;
     font-weight: 700;
   }
-  .badge-vip { background: rgba(245,166,35,0.2); color: var(--gold); }
-  .badge-premium { background: rgba(124,77,255,0.2); color: #A78BFF; }
+  .badge-vip { background: rgba(255,255,255,0.08); color: var(--text-soft); border: 1px solid var(--border); }
+  .badge-premium { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
 
   .membership-card .card-name {
     font-size: 14px;
@@ -436,13 +455,14 @@
     font-size: 32px;
     font-weight: 900;
     margin: 10px 0 2px;
-    background: linear-gradient(135deg, #fff, var(--gold-light));
+    background: linear-gradient(180deg, #ffffff 0%, #a8a8a8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.02em;
   }
   .membership-card.monthly .max-reward {
-    background: linear-gradient(135deg, #fff, #B39DDB);
+    background: linear-gradient(180deg, #e5e5e5 0%, #737373 100%);
     -webkit-background-clip: text;
     background-clip: text;
   }
@@ -491,7 +511,7 @@
   }
   .invited-card:hover {
     transform: translateX(4px);
-    border-color: rgba(245,166,35,0.25);
+    border-color: rgba(255,255,255,0.12);
   }
 
   .invited-card .plan-name {
@@ -518,8 +538,8 @@
     letter-spacing: 0.5px;
     margin-top: 2px;
   }
-  .reward-box.invitee .rb-val { color: #7DD4FC; }
-  .reward-box.inviter .rb-val { color: var(--gold); }
+  .reward-box.invitee .rb-val { color: #a3a3a3; }
+  .reward-box.inviter .rb-val { color: var(--highlight); }
 
   .divider-v {
     width: 1px;
@@ -594,8 +614,8 @@
     transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
     min-height: 2px;
   }
-  .bar-multiplier { background: linear-gradient(180deg, var(--gold), #E08C00); }
-  .bar-cumulative { background: linear-gradient(180deg, var(--purple), #5533CC); }
+  .bar-multiplier { background: linear-gradient(180deg, var(--tone-a), #9ca3af); }
+  .bar-cumulative { background: linear-gradient(180deg, #404040, #262626); }
 
   .chart-x-label {
     font-size: 10px;
@@ -609,7 +629,7 @@
 
   .bar-top-val {
     font-size: 9px;
-    color: var(--gold);
+    color: var(--accent);
     font-weight: 700;
     margin-bottom: 2px;
     white-space: nowrap;
@@ -636,25 +656,37 @@
     animation: fadeUp 0.6s ease 0.05s both;
   }
   .stat-card {
-    background: var(--card);
+    background: linear-gradient(180deg, #111111 0%, #0c0c0c 100%);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 20px;
     text-align: center;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset;
   }
   .stat-card .stat-val {
     font-size: 36px;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    background: linear-gradient(180deg, #ffffff 0%, #9ca3af 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1.1;
+    letter-spacing: -0.02em;
   }
-  .stat-card .stat-unit {
+  .stat-card .stat-val .stat-unit {
     font-size: 14px;
-    font-weight: 400;
-    opacity: 0.7;
+    font-weight: 500;
+    opacity: 0.85;
+    -webkit-text-fill-color: #a3a3a3;
+    background: none;
+    background-clip: border-box;
+  }
+  .stat-card .stat-val.stat-val--dim,
+  .stat-card .stat-val.stat-val--dim .stat-unit {
+    background: linear-gradient(180deg, #d4d4d4 0%, #525252 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   .stat-card .stat-label {
     font-size: 12px;
@@ -677,14 +709,14 @@
   .page-footer-rules h2 {
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--muted);
     margin-bottom: 12px;
   }
   .page-footer-rules p {
     font-size: 13px;
-    color: #9A9AB0;
+    color: var(--muted);
     line-height: 1.75;
     margin: 0;
   }
@@ -702,6 +734,8 @@
     .key-stats { grid-template-columns: repeat(2, 1fr); }
     .milestone-row { grid-template-columns: 80px 1fr; }
     .rewards-chips { display: none; }
+    .model-desc { white-space: normal; }
+    .model-hero-card { flex-direction: column; align-items: flex-start; padding: 24px; }
   }
 </style>
 </head>
@@ -740,7 +774,7 @@
       <div class="stat-label">邀满 10 人 · 累计总奖励倍数</div>
     </div>
     <div class="stat-card">
-      <div class="stat-val" style="background: linear-gradient(135deg,#A78BFF,#7C4DFF);-webkit-background-clip:text;background-clip:text;">1075<span class="stat-unit" style="-webkit-text-fill-color:initial;color:#A78BFF;">条</span></div>
+      <div class="stat-val stat-val--dim">1075<span class="stat-unit">条</span></div>
       <div class="stat-label">尊享年卡 · 最高可获生成条数</div>
     </div>
     <div class="stat-card">
@@ -755,11 +789,11 @@
     <div class="chart-wrap">
       <div class="chart-legend">
         <div class="legend-item">
-          <div class="legend-dot" style="background: var(--gold)"></div>
+          <div class="legend-dot" style="background: var(--tone-a)"></div>
           每单奖励倍数
         </div>
         <div class="legend-item">
-          <div class="legend-dot" style="background: var(--purple)"></div>
+          <div class="legend-dot" style="background: var(--tone-b)"></div>
           累计总奖励倍数
         </div>
       </div>
@@ -797,21 +831,21 @@
       <div class="membership-card annual">
         <div class="badge badge-vip">旗舰年卡</div>
         <div class="card-name">年度旗舰</div>
-        <div class="max-reward" style="background:linear-gradient(135deg,#fff,#FFD97A);-webkit-background-clip:text;background-clip:text;">430</div>
+        <div class="max-reward">430</div>
         <div class="reward-label">生成条数 <span class="model-inline-tag">Starvideo 2.0</span></div>
         <div class="per-invite">单人最高 <strong>100 条</strong></div>
       </div>
       <div class="membership-card monthly">
         <div class="badge badge-premium">尊享月卡</div>
         <div class="card-name">月度尊享</div>
-        <div class="max-reward" style="background:linear-gradient(135deg,#fff,#B39DDB);-webkit-background-clip:text;background-clip:text;">129</div>
+        <div class="max-reward">129</div>
         <div class="reward-label">生成条数 <span class="model-inline-tag">Starvideo 2.0</span></div>
         <div class="per-invite">单人最高 <strong>30 条</strong></div>
       </div>
       <div class="membership-card monthly">
         <div class="badge badge-premium">旗舰月卡</div>
         <div class="card-name">月度旗舰</div>
-        <div class="max-reward" style="background:linear-gradient(135deg,#fff,#B39DDB);-webkit-background-clip:text;background-clip:text;">43</div>
+        <div class="max-reward">43</div>
         <div class="reward-label">生成条数 <span class="model-inline-tag">Starvideo 2.0</span></div>
         <div class="per-invite">单人最高 <strong>10 条</strong></div>
       </div>
@@ -822,8 +856,8 @@
   <div class="invited-section">
     <div class="section-title">被邀请人购买套餐 · 双向奖励明细</div>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;color:var(--muted);">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#A78BFF" stroke-width="2"><path d="M12 2L2 7L12 12L22 7L12 2Z"/><path d="M2 12L12 17L22 12"/><path d="M2 17L12 22L22 17"/></svg>
-      以下条数均为 <strong style="color:#C4B5FD">Starvideo 2.0</strong> 专属生成条数
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2"><path d="M12 2L2 7L12 12L22 7L12 2Z"/><path d="M2 12L12 17L22 12"/><path d="M2 17L12 22L22 17"/></svg>
+      以下条数均为 <strong style="color:var(--text-soft)">Starvideo 2.0</strong> 专属生成条数
     </div>
     <div class="invited-cards" id="invitedCards"></div>
   </div>
@@ -932,7 +966,7 @@
     <div class="multiplier-bar-wrap">
       <div class="multiplier-label"><span>尊享年卡</span><span class="val">1075 条</span></div>
       <div class="multiplier-bar" style="height:8px">
-        <div class="multiplier-fill" style="--target-width:100%; background:linear-gradient(90deg,var(--gold),var(--gold-light))"></div>
+        <div class="multiplier-fill" style="--target-width:100%; background:linear-gradient(90deg,var(--tone-b),var(--tone-a))"></div>
       </div>
     </div>
     <div class="rewards-chips">
