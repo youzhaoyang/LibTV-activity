@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
-<title>活动邀请规则 · 可视化</title>
+<title>团队购买活动规则 · 可视化</title>
 <style>
   /* Apple Human Interface · 深色分组界面（系统语义色 + SF 栈） */
   :root {
@@ -612,12 +612,19 @@
     background: var(--secondary-grouped);
     border: 0.5px solid var(--separator-opaque);
     border-radius: var(--card-radius);
-    padding: 16px;
-    display: grid;
-    grid-template-columns: 1fr auto auto;
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
     gap: 14px;
-    align-items: center;
+    align-items: stretch;
     transition: background 0.2s var(--ease-apple);
+  }
+  .invited-card__rewards {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    gap: 0;
+    min-height: 76px;
   }
   .invited-card:hover {
     transform: none;
@@ -634,24 +641,50 @@
     color: var(--label-secondary);
     letter-spacing: -0.08px;
   }
-  .reward-box { text-align: center; min-width: 68px; }
+  .reward-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 0;
+    padding: 4px 8px;
+  }
   .reward-box .rb-val {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    letter-spacing: 0.35px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
   .reward-box .rb-label {
     font-size: 11px;
     color: var(--label-tertiary);
-    margin-top: 3px;
+    margin-top: 6px;
     letter-spacing: -0.05px;
+    line-height: 1.35;
+    max-width: 8em;
   }
   .reward-box.invitee .rb-val { color: var(--label-secondary); }
-  .reward-box.inviter .rb-val { color: var(--tint); }
-  .divider-v {
+  .reward-box.inviter .rb-val {
+    color: var(--tint);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .reward-box.inviter .rb-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--label-secondary);
+    margin-top: 8px;
+    max-width: 9em;
+  }
+  .invited-card__rewards .divider-v {
     width: 0.5px;
-    height: 36px;
+    align-self: stretch;
+    min-height: 52px;
+    height: auto;
     background: var(--separator);
+    justify-self: center;
   }
 
   /* —— 页脚说明 —— */
@@ -718,8 +751,8 @@
 
   <!-- Header -->
   <div class="header">
-    <div class="eyebrow">LibTV · 邀请有礼</div>
-    <h1>活动邀请规则</h1>
+    <div class="eyebrow">LibTV · 团队购买活动</div>
+    <h1>团队购买活动规则</h1>
     <p>邀同事一起加入团队，双方均可获得以下模型的生成条数奖励</p>
   </div>
 
@@ -957,18 +990,20 @@
     const card = document.createElement('div');
     card.className = 'invited-card';
     card.innerHTML = `
-      <div>
+      <div class="invited-card__plan">
         <div class="plan-name">${plan.name}</div>
         <div class="plan-price">${plan.price}</div>
       </div>
-      <div class="reward-box invitee">
-        <div class="rb-val">+${plan.inviteeReward}</div>
-        <div class="rb-label">被邀请人获得</div>
-      </div>
-      <div class="divider-v"></div>
-      <div class="reward-box inviter">
-        <div class="rb-val">+${plan.inviterReward}</div>
-        <div class="rb-label">邀请人基础奖励</div>
+      <div class="invited-card__rewards">
+        <div class="reward-box invitee">
+          <div class="rb-val">+${plan.inviteeReward}</div>
+          <div class="rb-label">被邀请人获得</div>
+        </div>
+        <div class="divider-v" aria-hidden="true"></div>
+        <div class="reward-box inviter">
+          <div class="rb-val">+${plan.inviterReward}</div>
+          <div class="rb-label">邀请人基础奖励</div>
+        </div>
       </div>
     `;
     invitedContainer.appendChild(card);
